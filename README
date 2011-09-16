@@ -1,0 +1,25 @@
+Homework #2*: Report (Input/Output/Conditional Evaluation)
+Due Date: 27-Sep-2011
+
+Requirements: (Multiple classes/Multiple types of input)
+•	You must an if statements and at least one switch statement in your program
+Input: Report Owner’s full name and 7 numbers (at least one double and one int)
+
+1.)	Input, via a question, the report owner’s first name as a string and build the last name via input, one character at a time 
+a.	You must check, conditionally, that the character entered is not a number between 0 – 9
+b.	Check, conditionally, to make sure the first name doesn’t contain any numeric characters, numbers between 0 – 9.  If it does you must remove it.  The first name can not contain any white space either.
+2.)	Input report name
+3.)	Try and print out a variable that isn’t initialized then comment out the printing statement
+4.)	Display the total of the numeric input after each input, average of numeric input, lowest numeric input, and the highest numeric input for the previous numeric inputs, before the next numeric input is asked for.
+5.)	 Have a program exit input value available (i.e. if you type -1 the program exists)
+6.)	 Create and display a final report that should have the report name, owner and the following:
+Numeric output should appear as a table with the following columns:  (columns should be underlined)
+a.	Input Number
+b.	Highest Number
+c.	Lowest Number
+d.	Total (by the row)
+e.	Average Number
+7.)	At the end you must have a grand total for the entries
+
+
+*You don’t have to include the pre or the post conditions for this homework assignment.  The class outline is described in figure 5.2, which is required.
