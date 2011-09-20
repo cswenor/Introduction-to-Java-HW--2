@@ -25,12 +25,22 @@ public class Homework2 {
         // Create counter int for number input
         int counter = 0;
         
+        boolean hasError = false;
+        
         // Printout of uninitialized String (Q:3)
         // System.out.println(userInput);
         
         // Gather First Name as a String (Q:1)
         System.out.println("Please Enter your First Name:");
-        report.setFirstName(keyboard.next());
+        do {
+            if (! report.setFirstName(keyboard.next())) {
+                hasError = true;
+                System.out.println("You entered invalid text.  Please try again.");
+            } else {
+                hasError = false;
+            }
+        } while (hasError);
+        
         
         // Skip line Fix
         keyboard.nextLine();
@@ -41,11 +51,15 @@ public class Homework2 {
         do {
             userInput = keyboard.nextLine();
             
-            if (! userInput.equals(""))
-                report.enterLastNameCharacter(userInput.charAt(0));
-            
+            if (! userInput.equals("")) {
+                if (! report.enterLastNameCharacter(userInput.charAt(0))){
+                    hasError = true;
+                } else {
+                    hasError = false;
+                }
+            }
             System.out.println("Current Last Name: " + report.getLastName());
-        } while (! userInput.equals(""));
+        } while (!userInput.isEmpty());
         
         // Gather Report Name as a String (Q:2)
         System.out.println("Please Enter the Name of the Report:");
@@ -59,17 +73,21 @@ public class Homework2 {
         do {
             userInput = keyboard.nextLine();
             
-            if (! userInput.equals(""))
-            {
-                report.enterNumber(Double.parseDouble(userInput));
-                counter++;
+            if (! userInput.isEmpty()) {
+                if (! report.enterNumber(Double.parseDouble(userInput))){
+                    hasError = true;
+                } else {
+                    hasError = false;
+                    counter++;
+                }
             }
 
             System.out.println("Total: " + report.getTotal());
             System.out.println("Average: " + report.getAverage());
             System.out.println("High: " + report.getHighNumber());
             System.out.println("Low: " + report.getLowNumber());
-        } while (! userInput.equals("") || counter <=7);
+            System.out.println("Count: " + counter);
+        } while ( !userInput.isEmpty() && counter < 7);
         
 
         

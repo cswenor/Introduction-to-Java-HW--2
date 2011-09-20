@@ -58,8 +58,9 @@ class Report {
     /**
      * @param firstName the firstName to set
      */
-    public void setFirstName(String firstName) {
+    public boolean setFirstName(String firstName) {
         this.firstName = firstName;
+        return true;
     }
 
     /**
@@ -77,7 +78,7 @@ class Report {
     }
     
     
-    public void enterNumber(double input_number) {
+    public boolean enterNumber(double input_number) {
         if (input_number > this.getHighNumber()){
             this.highNumber = input_number;
         }
@@ -85,10 +86,12 @@ class Report {
             this.lowNumber = input_number;
         }
         this.getNumbers().add(input_number);
+        return true;
     }
 
-    public void enterLastNameCharacter(char input_last_name_character){
+    public boolean enterLastNameCharacter(char input_last_name_character){
         this.lastName += input_last_name_character;
+        return true;
     }
 
     public float getTotal(){
