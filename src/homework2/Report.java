@@ -8,16 +8,13 @@ import java.util.ArrayList;
 
 ;
 
-/**
- *
- * @author cswenor
- */
 class Report {
     private double highNumber = 4.94065645841246544e-324d;
     private double lowNumber = 1.79769313486231570e+308d;
     private String reportName = "";
     private String firstName = "";
     private String lastName = "";
+    private String reportOutput = "";
     private ArrayList numbers = new ArrayList();
 
     /**
@@ -59,7 +56,14 @@ class Report {
      * @param firstName the firstName to set
      */
     public boolean setFirstName(String firstName) {
-        this.firstName = firstName;
+        
+        String newFirstName = "";
+        for(int i = 0; i < firstName.length(); i++){
+            if( ! this.isNumber(firstName.charAt(i)) && (firstName.charAt(i) != ' ')) {
+                newFirstName += firstName.charAt(i);
+            }   
+        }
+        this.firstName = newFirstName;
         return true;
     }
 
@@ -68,6 +72,20 @@ class Report {
      */
     public String getLastName() {
         return lastName;
+    }
+
+    /**
+     * @return the reportOutput
+     */
+    public String getReportOutput() {
+        return reportOutput;
+    }
+
+    /**
+     * @param reportOutput the reportOutput to set
+     */
+    private void setReportOutput(String reportOutput) {
+        this.reportOutput = reportOutput;
     }
 
     /**
@@ -86,12 +104,20 @@ class Report {
             this.lowNumber = input_number;
         }
         this.getNumbers().add(input_number);
+        
+        // this.setReportOutput()
         return true;
     }
 
     public boolean enterLastNameCharacter(char input_last_name_character){
-        this.lastName += input_last_name_character;
-        return true;
+        if (this.isNumber(input_last_name_character)){
+            return false;
+        } else {
+            this.lastName += input_last_name_character;
+            return true;
+        }
+        
+        
     }
 
     public float getTotal(){
@@ -110,8 +136,26 @@ class Report {
         average = this.getTotal() / getNumbers().size();
         return average;
     }
-
-    public void printReport(){
-
+    
+    private boolean isNumber(char inputCharacter){
+        boolean isNum = true;
+        switch (inputCharacter) {
+            case '0':
+            case '1':
+            case '2':
+            case '3':
+            case '4':
+            case '5':
+            case '6':
+            case '7':
+            case '8':
+            case '9':
+                isNum = true;
+                break;
+            default:
+                isNum = false;
+        }
+        
+        return isNum;
     }
 }

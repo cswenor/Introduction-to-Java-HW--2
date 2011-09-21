@@ -31,19 +31,18 @@ public class Homework2 {
         // System.out.println(userInput);
         
         // Gather First Name as a String (Q:1)
-        System.out.println("Please Enter your First Name:");
         do {
-            if (! report.setFirstName(keyboard.next())) {
+            System.out.println("Please Enter your First Name:");
+            userInput = keyboard.nextLine();
+            if (! report.setFirstName(userInput)) {
                 hasError = true;
                 System.out.println("You entered invalid text.  Please try again.");
             } else {
                 hasError = false;
             }
-        } while (hasError);
+        } while (userInput.isEmpty() || hasError);
         
-        
-        // Skip line Fix
-        keyboard.nextLine();
+        System.out.println("Current First Name: " + report.getFirstName());
         
         
         // Gather Last Name One Character at a Time (Q:1)
@@ -53,6 +52,7 @@ public class Homework2 {
             
             if (! userInput.equals("")) {
                 if (! report.enterLastNameCharacter(userInput.charAt(0))){
+                    System.out.println("The character you entered is a number.  Please try again.");
                     hasError = true;
                 } else {
                     hasError = false;
@@ -87,7 +87,7 @@ public class Homework2 {
             System.out.println("High: " + report.getHighNumber());
             System.out.println("Low: " + report.getLowNumber());
             System.out.println("Count: " + counter);
-        } while ( !userInput.isEmpty() && counter < 7);
+        } while ( !(userInput.isEmpty()) && (counter < 7));
         
 
         
