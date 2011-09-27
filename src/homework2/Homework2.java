@@ -17,11 +17,14 @@ public class Homework2 {
     public static void main(String[] args) {
         
         // Create the Report object
-        Report report = new Report();
+        ReportData reportData = new ReportData();
+		
         // Create the keyboard scanner
         Scanner keyboard= new Scanner (System.in);
+		
         // String for capturing user input
         String userInput = new String();
+		
         // Create counter int for number input
         int counter = 0;
         
@@ -34,7 +37,7 @@ public class Homework2 {
         do {
             System.out.println("Please Enter your First Name:");
             userInput = keyboard.nextLine();
-            if (! report.setFirstName(userInput)) {
+            if (! reportData.setFirstName(userInput)) {
                 hasError = true;
                 System.out.println("You entered invalid text.  Please try again.");
             } else {
@@ -42,7 +45,7 @@ public class Homework2 {
             }
         } while (userInput.isEmpty() || hasError);
         
-        System.out.println("Current First Name: " + report.getFirstName());
+        System.out.println("Current First Name: " + reportData.getFirstName());
         
         
         // Gather Last Name One Character at a Time (Q:1)
@@ -51,22 +54,20 @@ public class Homework2 {
             userInput = keyboard.nextLine();
             
             if (! userInput.equals("")) {
-                if (! report.enterLastNameCharacter(userInput.charAt(0))){
+                if (! reportData.enterLastNameCharacter(userInput.charAt(0))){
                     System.out.println("The character you entered is a number.  Please try again.");
                     hasError = true;
                 } else {
                     hasError = false;
                 }
             }
-            System.out.println("Current Last Name: " + report.getLastName());
+            System.out.println("Current Last Name: " + reportData.getLastName());
         } while (!userInput.isEmpty());
         
         // Gather Report Name as a String (Q:2)
         System.out.println("Please Enter the Name of the Report:");
-        report.setReportName(keyboard.next());
+        reportData.setReportName(keyboard.nextLine());
         
-        // Skip line Fix
-        keyboard.nextLine();
         
         // Gather the seven report numbers. (Q:4)
         System.out.println("Please enter seven number.  One on each line.  (Send a blank line to end early)");
@@ -74,7 +75,7 @@ public class Homework2 {
             userInput = keyboard.nextLine();
             
             if (! userInput.isEmpty()) {
-                if (! report.enterNumber(Double.parseDouble(userInput))){
+                if (! reportData.enterNumber(Double.parseDouble(userInput))){
                     hasError = true;
                 } else {
                     hasError = false;
@@ -82,18 +83,16 @@ public class Homework2 {
                 }
             }
 
-            System.out.println("Total: " + report.getTotal());
-            System.out.println("Average: " + report.getAverage());
-            System.out.println("High: " + report.getHighNumber());
-            System.out.println("Low: " + report.getLowNumber());
+            System.out.println("Total: " + reportData.getTotal());
+            System.out.println("Average: " + reportData.getAverage());
+            System.out.println("High: " + reportData.getHighNumber());
+            System.out.println("Low: " + reportData.getLowNumber());
             System.out.println("Count: " + counter);
         } while ( !(userInput.isEmpty()) && (counter < 7));
         
-
-        
-        System.out.println(report.getFirstName());
-        System.out.println(report.getLastName());
-        System.out.println(report.getReportName());
+		// Use a static function to create and display the Report
+		ReportView.createAndShowReport(reportData);
+		
         
     }
     

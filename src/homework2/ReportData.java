@@ -5,16 +5,17 @@
 package homework2;
 
 import java.util.ArrayList;
+import java.util.Vector;
 
 ;
 
-class Report {
-    private double highNumber = 4.94065645841246544e-324d;
-    private double lowNumber = 1.79769313486231570e+308d;
+class ReportData {
+    private double highNumber = Double.MIN_VALUE;
+    private double lowNumber = Double.MAX_VALUE;
     private String reportName = "";
     private String firstName = "";
     private String lastName = "";
-    private String reportOutput = "";
+	private ArrayList<ArrayList> reportData = new ArrayList<ArrayList>();
     private ArrayList numbers = new ArrayList();
 
     /**
@@ -74,19 +75,12 @@ class Report {
         return lastName;
     }
 
-    /**
-     * @return the reportOutput
-     */
-    public String getReportOutput() {
-        return reportOutput;
-    }
-
-    /**
-     * @param reportOutput the reportOutput to set
-     */
-    private void setReportOutput(String reportOutput) {
-        this.reportOutput = reportOutput;
-    }
+	/**
+	 * @return the reportData
+	 */
+	public ArrayList<ArrayList> getReportData() {
+		return reportData;
+	}
 
     /**
      * @return the numbers
@@ -95,22 +89,42 @@ class Report {
         return numbers;
     }
     
-    
+    /**
+	 * Accept a number and save it to the report.  Then generate the report info for later use
+	 * @param input_number
+	 * @return 
+	 */
     public boolean enterNumber(double input_number) {
+		// If the input number is the highest one so far then set it to the high Number
         if (input_number > this.getHighNumber()){
             this.highNumber = input_number;
         }
+		// Also if it's the lowest number set it to the lowest number
         if (input_number < this.getLowNumber()){
             this.lowNumber = input_number;
         }
         this.getNumbers().add(input_number);
-        
-        // this.setReportOutput()
+		
+		// Generate and save the Report Data for later display
+		ArrayList<String> reportRow = new ArrayList<String>();
+		reportRow.add(Double.toString(input_number));
+		reportRow.add(Double.toString(this.highNumber));
+		reportRow.add(Double.toString(this.lowNumber));
+		reportRow.add(Float.toString(this.getTotal()));
+		reportRow.add(Float.toString(this.getAverage()));
+		
+        this.getReportData().add(reportRow);
         return true;
     }
 
+	/**
+	 * Accept a Character and check to see if it's a number.  If it is a number ignore the input and return false.
+	 * @param input_last_name_character
+	 * @return 
+	 */
     public boolean enterLastNameCharacter(char input_last_name_character){
-        if (this.isNumber(input_last_name_character)){
+        // Check to see if the Last Name Character is a Number if it is don't save it and return false
+		if (this.isNumber(input_last_name_character)){
             return false;
         } else {
             this.lastName += input_last_name_character;
@@ -119,7 +133,11 @@ class Report {
         
         
     }
-
+	
+	/**
+	 * Return the total of all the numbers in the report
+	 * @return total
+	 */
     public float getTotal(){
         float total = 0;
         Object number_array[] = getNumbers().toArray();
@@ -130,13 +148,22 @@ class Report {
         }
         return total;
     }
-
+	
+	/**
+	 * Return the average of all the numbers in the report
+	 * @return average
+	 */
     public float getAverage(){
         float average = 0;
         average = this.getTotal() / getNumbers().size();
         return average;
     }
     
+	/**
+	 * A Validation checker to show I can use a switch case
+	 * @param inputCharacter
+	 * @return 
+	 */
     private boolean isNumber(char inputCharacter){
         boolean isNum = true;
         switch (inputCharacter) {
@@ -159,3 +186,4 @@ class Report {
         return isNum;
     }
 }
+
