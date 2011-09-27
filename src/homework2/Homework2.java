@@ -79,16 +79,18 @@ public class Homework2 {
                     hasError = true;
                 } else {
                     hasError = false;
-                    counter++;
+                    
+					System.out.println("Total: " + reportData.getTotal());
+					System.out.println("Average: " + reportData.getAverage());
+					System.out.println("High: " + reportData.getHighNumber());
+					System.out.println("Low: " + reportData.getLowNumber());
+					// System.out.println("Count: " + counter);
+					counter++;
                 }
             }
 
-            System.out.println("Total: " + reportData.getTotal());
-            System.out.println("Average: " + reportData.getAverage());
-            System.out.println("High: " + reportData.getHighNumber());
-            System.out.println("Low: " + reportData.getLowNumber());
-            System.out.println("Count: " + counter);
-        } while ( !(userInput.isEmpty()) && (counter < 7));
+            
+        } while ( !( userInput.isEmpty() && counter >= 1 ) && (counter < 7));
         
 		// Use a static function to create and display the Report
 		ReportView.createAndShowReport(reportData);
